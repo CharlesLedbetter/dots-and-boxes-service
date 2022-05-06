@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: dots-and-boxes-service
+  datasource:
+    url: jdbc:h2:file:./src/main/resources/data/data;INIT=runscript from './src/main/resources/init.sql'
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  h2:
+    console:
+      enabled: true
+    jpa:
+      database-platform: org.hibernate.dialect.H2Dialect
+      defer-datasource-initialization: true
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
