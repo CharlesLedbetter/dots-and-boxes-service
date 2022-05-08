@@ -21,7 +21,11 @@ class SquareController(private val squareService: SquareService, private val gam
     @PostMapping("/{id}/mark-line")
     fun markLineOfSquare(@PathVariable id: Long, @RequestParam direction: Direction): SirenEntity {
         val square = squareService.getSquare(id)
-        squareService.markLineOfSquare(square, direction)
+        if (squareService.markLineOfSquare(square, direction)) {
+            gameService.updateTurn(square.game)
+        } else {
+            gameService.checkForEndState(square.game)
+        }
         return gameService.getGameEntity(square.game.id!!)
     }
 }

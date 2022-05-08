@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS Dots_Boxes_Game
     width INT NOT NULL,
     height INT NOT NULL,
     owner VARCHAR(50) NOT NULL,
+    winner VARCHAR(50) NULL,
     turn Int NOT NULL,
     number_of_players Int NOT NULL,
     UNIQUE (game_name, owner)
@@ -25,7 +26,7 @@ CREATE TABLE IF NOT EXISTS Square
     square_x INT NOT NULL,
     square_y CHAR NOT NULL,
     UNIQUE (game_id, square_x, square_y),
-    square_owner Int NULL,
+    square_owner VARCHAR(50) NULL,
     up_line INT NOT NULL,
     right_line INT NOT NULL,
     down_line INT NOT NULL,
@@ -36,5 +37,16 @@ CREATE TABLE IF NOT EXISTS Square
     FOREIGN KEY (left_line) REFERENCES Line (line_id),
     UNIQUE (up_line, right_line, down_line, left_line)
 );
+
+CREATE TABLE IF NOT EXISTS Player
+(
+   player_id INT AUTO_INCREMENT PRIMARY KEY,
+   game_id INT NOT NULL,
+   FOREIGN KEY (game_id) REFERENCES Dots_Boxes_Game (game_id),
+   player_order INT NOT NULL,
+   player_name VARCHAR(50) NOT NULL,
+   UNIQUE (game_id, player_name),
+   UNIQUE (game_id, player_order)
+)
 
 

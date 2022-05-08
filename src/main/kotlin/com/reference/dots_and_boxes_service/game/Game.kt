@@ -30,6 +30,9 @@ class Game (
     @Column(name="OWNER")
     var owner: String,
 
+    @Column(name="WINNER")
+    var winner: String? = null,
+
     @Column(name="TURN")
     var turn: Long = 1,
 
@@ -42,15 +45,31 @@ class Game (
     fun sirenSubEntity() : GameEntity {
         return GameEntity(
             title=name,
-            properties=mapOf("name" to name, "owner" to owner, "width" to width, "height" to height, "turn" to turn, "player-count" to playerCount),
+            properties=mapOf(
+                "name" to name,
+                "owner" to owner,
+                "winner" to winner,
+                "width" to width,
+                "height" to height,
+                "turn" to turn,
+                "player-count" to playerCount
+            ),
             links=getGameLinks(true)
         )
     }
 
-    fun sirenEntity(squares: ArrayList<SirenEntity>? = null) : GameEntity {
+    fun sirenEntity(player: String, squares: ArrayList<SirenEntity>? = null) : GameEntity {
         return GameEntity(
             title=name,
-            properties=mapOf("name" to name, "owner" to owner, "width" to width, "height" to height, "turn" to turn, "player-count" to playerCount),
+            properties=mapOf(
+                "name" to name,
+                "owner" to owner,
+                "winner" to winner,
+                "width" to width,
+                "height" to height,
+                "turn" to player,
+                "player-count" to playerCount
+            ),
             links=getGameLinks(false),
             entities=squares ?: getSquares()
         )

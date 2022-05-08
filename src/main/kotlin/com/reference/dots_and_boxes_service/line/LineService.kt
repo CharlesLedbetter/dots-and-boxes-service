@@ -13,4 +13,13 @@ class LineService(private val repository: LineRepository) {
         }
     }
 
+    fun createLinesForGame(numberOfLines: Long): ArrayList<Line> {
+        val lines: ArrayList<Line> = arrayListOf()
+        for (i in 1..numberOfLines) {
+            val line = Line(null, false)
+            repository.save(line).ifPresent { lines.add(it) }
+        }
+        return lines
+    }
+
 }

@@ -7,7 +7,7 @@ import com.reference.dots_and_boxes_service.models.siren.SirenLink
 class SquareEntity (
     x: Long,
     y: Char,
-    owner: String,
+    owner: String? = null,
     links: ArrayList<SirenLink>? = null,
     actions: ArrayList<SirenAction>? = null,
     entities: ArrayList<SirenEntity>? = null

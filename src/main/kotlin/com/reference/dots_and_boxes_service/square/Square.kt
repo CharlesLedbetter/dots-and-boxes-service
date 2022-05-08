@@ -33,7 +33,7 @@ class Square (
     var y: Char,
 
     @Column(name="SQUARE_OWNER")
-    var owner: Long? = null,
+    var owner: String? = null,
 
     @OneToOne
     @JoinColumn(name="UP_LINE")
@@ -55,7 +55,7 @@ class Square (
         return SquareEntity(
             x=x,
             y=y,
-            owner="$owner",
+            owner=owner,
             links=getSquareLinks(true),
             actions=getActions(false),
             entities=getEntities()
@@ -66,7 +66,7 @@ class Square (
         return SquareEntity(
             x=x,
             y=y,
-            owner="$owner",
+            owner=owner,
             links=getSquareLinks(true),
             entities=getEntities()
         )
@@ -93,20 +93,19 @@ class Square (
 
     private fun getActions(isSubEntity: Boolean): ArrayList<SirenAction>? {
         val actions = ArrayList<SirenAction>()
-        val fields = ArrayList<SirenField>()
-        fields.add(SirenField(
+        val fields = arrayListOf(
+            SirenField(
             title="Line Direction",
-            name="direction",
-            `class`=arrayOf("Line"),
-        ))
+            name="direction"
+            )
+        )
         actions.add(SirenAction(
             title="Mark Line",
             name="mark-line",
-            `class`= arrayOf("Line"),
             method=HttpMethod.POST,
             fields=fields,
-            href=squareMarkLinePath(id!!))
-        )
+            href=squareMarkLinePath(id!!)
+        ))
         return actions
     }
 
