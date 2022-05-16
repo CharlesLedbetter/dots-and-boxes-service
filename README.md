@@ -1,9 +1,10 @@
 # Dots and Boxes Service
 
 * [Overview](#overview)
+* [To-dos](#to-dos)
 
 
-This Project is a work in progress, see TO-Dos section.
+This Project is a work in progress, see [To-dos section](#to-dos).
 
 ## Overview
 
